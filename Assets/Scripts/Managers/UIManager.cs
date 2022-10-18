@@ -10,6 +10,8 @@ namespace Managers
         [SerializeField] private WinView winView;
         [SerializeField] private LoseView loseView;
 
+        public InGameView InGameView => inGameView;
+
         public static UIManager instance;
         private void Awake()
         {
@@ -26,8 +28,8 @@ namespace Managers
         private void TurnOffAllViews()
         {
             inGameView.Hide();
-            winView.Hide();
-            loseView.Hide();
+            // winView.Hide();
+            // loseView.Hide();
         }
 
         public void TurnOnInGameView()
