@@ -62,7 +62,7 @@ public class OrbitalMovement : MonoBehaviour
 
         var screenDeltaAxisValue = GetScreenDeltaAxisValue(leanFinger);
         
-        _deltaRotation = screenDeltaAxisValue * movementSpeed * Time.deltaTime;
+        _deltaRotation = -screenDeltaAxisValue * movementSpeed * Time.deltaTime;
         
         var newRotation = _currentAngle + _deltaRotation;
 
