@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Managers;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,8 +18,10 @@ namespace Entities
         }
         private void OnTriggerEnter(Collider other)
         {
+            if (!other.CompareTag("Ball")) return;
             _currentBallsCount++;
             UpdateBallsCountUI();
+            other.tag = "EnteredBall";
         }
 
         private void UpdateBallsCountUI()
