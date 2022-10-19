@@ -34,7 +34,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 42.04, y: 60.600098}
+  m_AnchoredPosition: {x: 33.5, y: 122.3}
   m_SizeDelta: {x: 357.6758, y: 100}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &8064254114308903322
@@ -92,7 +92,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 68
+  m_fontSize: 70
   m_fontSizeBase: 68
   m_fontWeight: 400
   m_enableAutoSizing: 0
@@ -184,7 +184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   container: {fileID: 3942805938915060053}
-  ballsCountText: {fileID: 0}
+  ballsCountText: {fileID: 8581520230716278877}
 --- !u!1 &3942805938915060053
 GameObject:
   m_ObjectHideFlags: 0
