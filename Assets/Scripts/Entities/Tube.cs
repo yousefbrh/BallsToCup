@@ -1,4 +1,5 @@
 using System;
+using DefaultNamespace;
 using UnityEngine;
 
 namespace Entities
@@ -7,13 +8,23 @@ namespace Entities
     {
         [SerializeField] private Ball ballPrefab;
         [SerializeField] private Transform ballPlacement;
+        [SerializeField] private ExitTubePortalHandler exitTubePortalHandler;
         
         private int _tubeCapacity;
+
+        public Action onLevelFinished;
 
         public void Initialize(int tubeCapacity)
         {
             SetTubeCapacity(tubeCapacity);
             CreateBalls();
+            exitTubePortalHandler.onBallExit += CheckFinish;
+        }
+
+        private void CheckFinish()
+        {
+            if (exitTubePortalHandler.ExitBallsCount() == _tubeCapacity)
+                onLevelFinished?.Invoke();
         }
 
         private void SetTubeCapacity(int amount)
@@ -29,6 +40,11 @@ namespace Entities
                 ballClone.Initialize();
                 ballClone.transform.SetParent(ballPlacement, true);
             }
+        }
+
+        private void OnDestroy()
+        {
+            exitTubePortalHandler.onBallExit -= CheckFinish;
         }
     }
 }

@@ -46,7 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelNumber: 1
-  ballsCount: 40
+  ballsCountOnTube: 40
+  ballsCountOnCup: 20
   cup: {fileID: 4063940981995020724}
   tube: {fileID: 6442800577002450584}
 --- !u!1001 &4063940981876235366

@@ -5,7 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ball
-  - EnteredBall
+  - BallInsideTube
+  - BallInsideCup
   layers:
   - Default
   - TransparentFX

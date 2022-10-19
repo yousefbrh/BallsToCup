@@ -21,7 +21,7 @@ namespace Entities
             if (!other.CompareTag("Ball")) return;
             _currentBallsCount++;
             UpdateBallsCountUI();
-            other.tag = "EnteredBall";
+            other.tag = "BallInsideCup";
         }
 
         private void UpdateBallsCountUI()

@@ -156,6 +156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ballPrefab: {fileID: 2325873048292918260, guid: 67efdec25f2924e8994ec733eda185eb, type: 3}
   ballPlacement: {fileID: 1250940000102741382}
+  exitTubePortalHandler: {fileID: 5294333309943420719}
 --- !u!1001 &3706925144740732984
 PrefabInstance:
   m_ObjectHideFlags: 0
