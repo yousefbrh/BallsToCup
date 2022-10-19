@@ -46,8 +46,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelNumber: 1
-  ballsCount: 20
+  ballsCount: 40
   cup: {fileID: 4063940981995020724}
+  tube: {fileID: 6442800577002450584}
 --- !u!1001 &4063940981876235366
 PrefabInstance:
   m_ObjectHideFlags: 0
