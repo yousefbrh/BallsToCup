@@ -1,3 +1,4 @@
+using System;
 using Lean.Touch;
 using UnityEngine;
 
@@ -129,5 +130,12 @@ public class OrbitalMovement : MonoBehaviour
     {
         UpToDown,
         RightToLeft
+    }
+
+    private void OnDestroy()
+    {
+        LeanTouch.OnFingerDown -= ActivateMovement;
+        LeanTouch.OnFingerUp -= DeactivateMovement;
+        LeanTouch.OnFingerUpdate -= OrbitalMove;
     }
 }
