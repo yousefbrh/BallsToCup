@@ -6,12 +6,12 @@ namespace UI
     {
         [SerializeField] private GameObject container;
 
-        public void Show()
+        public virtual void Show()
         {
             container.SetActive(true);
         }
 
-        public void Hide()
+        public virtual void Hide()
         {
             container.SetActive(false);
         }
