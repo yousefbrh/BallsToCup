@@ -32,10 +32,7 @@ namespace GameCore
 
         private void LevelFinished()
         {
-            if (_isPlayerWon)
-                GameManager.instance.Win();
-            else 
-                GameManager.instance.Lose();
+            GameManager.instance.LevelFinished(_isPlayerWon);
         }
 
         private void OnDestroy()

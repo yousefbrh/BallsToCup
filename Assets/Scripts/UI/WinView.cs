@@ -1,36 +1,13 @@
-using System;
-using UnityEngine;
-using UnityEngine.UI;
+using Managers;
 
 namespace UI
 {
-    public class WinView : View
+    public class WinView : FinishView
     {
-        [SerializeField] private Button button;
-
-        public override void Show()
+        protected override void FinishAction()
         {
-            base.Show();
-            SubscribeWinButton(true);
-        }
-
-        private void SubscribeWinButton(bool isSubscribing)
-        {
-            if (isSubscribing)
-                button.onClick.AddListener(WinAction);
-            else 
-                button.onClick.RemoveListener(WinAction);
-        }
-
-        private void WinAction()
-        {
-            Debug.Log("sdsdsdsdsd");
-        }
-
-        public override void Hide()
-        {
-            base.Hide();
-            SubscribeWinButton(false);
+            base.FinishAction();
+            GameManager.instance.Win();
         }
     }
 }

@@ -32,16 +32,24 @@ namespace Managers
             UIManager.instance.TurnOnInGameView();
         }
 
+        public void LevelFinished(bool isWin)
+        {
+            if (isWin)
+                UIManager.instance.TurnOnWinView();
+            else 
+                UIManager.instance.TurnOnLoseView();
+        }
+
         public void Win()
         {
-            UIManager.instance.TurnOnWinView();
             LevelManager.instance.LevelFinished(true);
+            UIManager.instance.TurnOnInGameView();
         }
 
         public void Lose()
         {
-            UIManager.instance.TurnOnLoseView();
             LevelManager.instance.LevelFinished(false);
+            UIManager.instance.TurnOnInGameView();
         }
     }
 }
