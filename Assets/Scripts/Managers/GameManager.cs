@@ -35,7 +35,10 @@ namespace Managers
         public void LevelFinished(bool isWin)
         {
             if (isWin)
+            {
                 UIManager.instance.TurnOnWinView();
+                Prefs.CurrentLevel++;
+            }
             else 
                 UIManager.instance.TurnOnLoseView();
         }
