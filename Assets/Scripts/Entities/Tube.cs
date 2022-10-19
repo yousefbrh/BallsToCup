@@ -45,6 +45,7 @@ namespace Entities
         private void OnDestroy()
         {
             exitTubePortalHandler.onBallExit -= CheckFinish;
+            exitTubePortalHandler.DestroyBalls();
         }
     }
 }

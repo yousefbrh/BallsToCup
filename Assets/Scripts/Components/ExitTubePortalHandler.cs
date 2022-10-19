@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Entities;
 using UnityEngine;
 
@@ -23,6 +24,16 @@ namespace DefaultNamespace
         public int ExitBallsCount()
         {
             return _exitBalls.Count;
+        }
+
+        public void DestroyBalls()
+        {
+            foreach (var ball in _exitBalls.Where(ball => ball != null))
+            {
+                Destroy(ball.gameObject);
+            }
+
+            _exitBalls.Clear();
         }
     }
 }
