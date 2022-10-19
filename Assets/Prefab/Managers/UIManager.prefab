@@ -115,7 +115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inGameView: {fileID: 567621117954647367}
-  winView: {fileID: 0}
+  winView: {fileID: 6166412108674210473}
   loseView: {fileID: 0}
 --- !u!1001 &1033005333810679463
 PrefabInstance:
@@ -219,6 +219,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5356842069014961306, guid: 890d0a4593a1949ae81ef0ac30cb0a60, type: 3}
   m_PrefabInstance: {fileID: 1033005333810679463}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6166412108674210473 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6613122381020861454, guid: 890d0a4593a1949ae81ef0ac30cb0a60, type: 3}
+  m_PrefabInstance: {fileID: 1033005333810679463}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed4269b6455e4b1c88dce9368d24b600, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4834241564528635689
 PrefabInstance:
   m_ObjectHideFlags: 0

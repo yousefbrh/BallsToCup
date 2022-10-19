@@ -6,6 +6,14 @@ namespace Managers
 {
     public class GameManager : MonoBehaviour
     {
+        public static GameManager instance;
+        
+        private void Awake()
+        {
+            if (!instance)
+                instance = this;
+        }
+
         private void Start()
         {
             LoadGameData();
