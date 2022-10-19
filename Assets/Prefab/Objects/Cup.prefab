@@ -87,6 +87,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cup_Art
       objectReference: {fileID: 0}
+    - target: {fileID: 4094042664665113228, guid: 889128cb33f8f4a77974a83b77b11c46, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7d738c4ae58204009a73578278c45500, type: 2}
     - target: {fileID: 8847661874472680007, guid: 889128cb33f8f4a77974a83b77b11c46, type: 3}
       propertyPath: m_RootOrder
       value: 0
