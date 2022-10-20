@@ -8,6 +8,8 @@ namespace Entities
 {
     public class Cup : MonoBehaviour
     {
+        [SerializeField] private ParticleSystem finishTaskParticle;
+        
         private int _cupCapacity;
         private int _currentBallsCount;
         private bool _isCupReachItsLimit;
@@ -34,6 +36,7 @@ namespace Entities
             if (_currentBallsCount != _cupCapacity) return;
             onCupLimitReached?.Invoke();
             _isCupReachItsLimit = true;
+            finishTaskParticle.Play();
         }
 
         private void UpdateBallsCountUI()
