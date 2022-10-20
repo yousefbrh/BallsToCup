@@ -7,6 +7,9 @@ namespace Entities
     {
         [SerializeField] private List<Material> materials = new List<Material>();
         [SerializeField] private MeshRenderer meshRenderer;
+        [SerializeField] private PhysicMaterial bounceMaterial;
+        [SerializeField] private Collider collider;
+        [SerializeField] private bool isBouncing;
         private Transform _rootTransform;
 
         public void Initialize()
@@ -25,6 +28,12 @@ namespace Entities
         public void BallIsOutsideOfTube()
         {
             transform.SetParent(_rootTransform, true);
+            ActiveBouncing();
+        }
+
+        private void ActiveBouncing()
+        {
+            collider.material = bounceMaterial;
         }
     }
 }

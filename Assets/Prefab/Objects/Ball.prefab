@@ -118,6 +118,9 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 7e5d3cf97b76849e981982e2d4ff1160, type: 2}
   - {fileID: 2100000, guid: 095a0225597084533b11d147a60d0223, type: 2}
   meshRenderer: {fileID: 5658295323715338869}
+  bounceMaterial: {fileID: 13400000, guid: e7f9addc6c6ae4f16a16a1c4e211338e, type: 2}
+  collider: {fileID: 755661414452770119}
+  isBouncing: 1
 --- !u!54 &8271361439492723932
 Rigidbody:
   m_ObjectHideFlags: 0
