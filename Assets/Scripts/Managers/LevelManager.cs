@@ -24,12 +24,15 @@ namespace Managers
         public void SetCurrentLevel(int value)
         {
             _currentLevelNumber = value;
-            _currentLevelNumber %= levels.Count;
+            if (_currentLevelNumber % levels.Count == 0)
+                _currentLevelNumber = levels.Count;
+            else
+                _currentLevelNumber %= levels.Count;
         }
 
         public void LoadLevel()
         {
-            var chosenLevel = levels.Find(level => level.LevelNumber - 1 == _currentLevelNumber);
+            var chosenLevel = levels.Find(level => level.LevelNumber == _currentLevelNumber);
             _currentLevel = Instantiate(chosenLevel);
         }
 
