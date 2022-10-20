@@ -48,7 +48,7 @@ MonoBehaviour:
   levelNumber: 1
   ballsCountOnTube: 40
   ballsCountOnCup: 20
-  cup: {fileID: 4063940981995020724}
+  cup: {fileID: 462468034286916726}
   tube: {fileID: 6442800577002450584}
 --- !u!1001 &4063940981876235366
 PrefabInstance:
@@ -188,23 +188,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc5ca0117a56542b481323ae18b0505a, type: 3}
---- !u!1 &6464432020278423887 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7048206425206680693, guid: dc5ca0117a56542b481323ae18b0505a, type: 3}
-  m_PrefabInstance: {fileID: 4063940982419938618}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1033489408987139859 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3905102389883195945, guid: dc5ca0117a56542b481323ae18b0505a, type: 3}
   m_PrefabInstance: {fileID: 4063940982419938618}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4063940981995020724
+--- !u!114 &462468034286916726 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 4471231038574545228, guid: dc5ca0117a56542b481323ae18b0505a, type: 3}
+  m_PrefabInstance: {fileID: 4063940982419938618}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6464432020278423887}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62592c37994f4a3aa84586e4c665c38d, type: 3}

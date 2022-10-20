@@ -41,6 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3905102389883195945}
   - component: {fileID: 5561884600963725388}
+  - component: {fileID: 4471231038574545228}
   m_Layer: 0
   m_Name: Cup
   m_TagString: Untagged
@@ -76,6 +77,18 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &4471231038574545228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7048206425206680693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62592c37994f4a3aa84586e4c665c38d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7543197926651446868
 PrefabInstance:
   m_ObjectHideFlags: 0
