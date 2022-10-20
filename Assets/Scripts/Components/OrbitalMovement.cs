@@ -65,7 +65,7 @@ namespace Components
 
             var screenDeltaAxisValue = GetScreenDeltaAxisValue(leanFinger);
         
-            _deltaRotation = -screenDeltaAxisValue * GetMovementSpeed() * Time.deltaTime;
+            _deltaRotation = screenDeltaAxisValue * GetMovementSpeed() * Time.deltaTime;
         
             var newRotation = _currentAngle + _deltaRotation;
 
@@ -118,35 +118,47 @@ namespace Components
         {
             var screenSize = leanFinger.ScreenPosition;
             var screenDelta = leanFinger.ScreenDelta;
-            if (screenSize.x <= Screen.width / 2 && screenSize.y <= Screen.height / 2)
+            if (screenSize.x < Screen.width / 2 && screenSize.y < Screen.height / 2)
             {
-                if (screenDelta.x <= 0 && screenDelta.y >= 0)
-                    return -1;
-                if (screenDelta.x >= 0 && screenDelta.y <= 0)
+                if (screenDelta.x < 0 && screenDelta.y > 0)
                     return 1;
+                if (screenDelta.x > 0 && screenDelta.y < 0)
+                    return -1;
+                if (screenDelta.y > screenDelta.x)
+                    return 1;
+                return -1;
             }
-            if (screenSize.x <= Screen.width / 2 && screenSize.y >= Screen.height / 2)
+            if (screenSize.x < Screen.width / 2 && screenSize.y > Screen.height / 2)
             {
-                if (screenDelta.x <= 0 && screenDelta.y <= 0)
-                    return 1;
-                if (screenDelta.x >= 0 && screenDelta.y >= 0)
+                if (screenDelta.x < 0 && screenDelta.y < 0)
                     return -1;
+                if (screenDelta.x > 0 && screenDelta.y > 0)
+                    return 1;
+                if (screenDelta.x + screenDelta.y > 0)
+                    return 1;
+                return -1;
             }
-            if (screenSize.x >= Screen.width / 2 && screenSize.y >= Screen.height / 2)
+            if (screenSize.x > Screen.width / 2 && screenSize.y > Screen.height / 2)
             {
-                if (screenDelta.x <= 0 && screenDelta.y >= 0)
-                    return 1;
-                if (screenDelta.x >= 0 && screenDelta.y <= 0)
+                if (screenDelta.x < 0 && screenDelta.y > 0)
                     return -1;
+                if (screenDelta.x > 0 && screenDelta.y < 0)
+                    return 1;
+                if (screenDelta.y > screenDelta.x)
+                    return -1;
+                return 1;
             }
-            if (screenSize.x >= Screen.width / 2 && screenSize.y <= Screen.height / 2)
+            if (screenSize.x > Screen.width / 2 && screenSize.y < Screen.height / 2)
             {
-                if (screenDelta.x <= 0 && screenDelta.y <= 0)
-                    return -1;
-                if (screenDelta.x >= 0 && screenDelta.y >= 0)
+                if (screenDelta.x < 0 && screenDelta.y < 0)
                     return 1;
+                if (screenDelta.x > 0 && screenDelta.y > 0)
+                    return -1;
+                if (screenDelta.x + screenDelta.y > 0)
+                    return -1;
+                return 1;
             }
-
+            
             return 0;
         }
 
