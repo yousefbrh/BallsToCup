@@ -1,141 +1,184 @@
-using System;
 using Lean.Touch;
 using UnityEngine;
 
-public class OrbitalMovement : MonoBehaviour
+namespace Components
 {
-    [SerializeField] private Transform centerTransform;
-    [SerializeField] private MovementAxis movementAxis;
-    [SerializeField] private TouchType touchType;
-    [SerializeField] private float movementSpeed;
+    public class OrbitalMovement : MonoBehaviour
+    {
+        [SerializeField] private Transform centerTransform;
+        [SerializeField] private MovementAxis movementAxis;
+        [SerializeField] private TouchType touchType;
+        [SerializeField] private float movementSpeedForUnity;
+        [SerializeField] private float movementSpeedForExport;
+
+        [SerializeField] private bool hasRotationLimit;
+        [SerializeField] private float minLimitedAngel;
+        [SerializeField] private float maxLimitedAngel;
+
+        [SerializeField] private bool hasStartingPosition;
+
+        [SerializeField] private Transform startingPositionTransform;
     
-    [SerializeField] private bool hasRotationLimit;
-    [SerializeField] private float minLimitedAngel;
-    [SerializeField] private float maxLimitedAngel;
+        private float _currentAngle;
+        private float _deltaRotation;
+        private bool _canMove;
 
-    [SerializeField] private bool hasStartingPosition;
+        private void Start()
+        {
+            InitializeLean();
+            SetupStartingPosition();
+        }
 
-    [SerializeField] private Transform startingPositionTransform;
-    
-    private float _currentAngle;
-    private float _deltaRotation;
-    private bool _canMove;
+        private void InitializeLean()
+        {
+            LeanTouch.OnFingerDown += ActivateMovement;
+            LeanTouch.OnFingerUp += DeactivateMovement;
+            LeanTouch.OnFingerUpdate += OrbitalMove;
+        }
 
-    private void Start()
-    {
-        InitializeLean();
-        SetupStartingPosition();
-    }
+        private void SetupStartingPosition()
+        {
+            if (hasStartingPosition)
+                transform.position = startingPositionTransform.position;
+        }
 
-    private void InitializeLean()
-    {
-        LeanTouch.OnFingerDown += ActivateMovement;
-        LeanTouch.OnFingerUp += DeactivateMovement;
-        LeanTouch.OnFingerUpdate += OrbitalMove;
-    }
+        //In case that you want to initialize variables with script
+        public void Initialize(Transform centerTransform)
+        {
+            this.centerTransform = centerTransform;
+        }
 
-    private void SetupStartingPosition()
-    {
-        if (hasStartingPosition)
-            transform.position = startingPositionTransform.position;
-    }
+        public void ActivateMovement(LeanFinger leanFinger)
+        {
+            _canMove = true;
+        }
 
-    //In case that you want to initialize variables with script
-    public void Initialize(Transform centerTransform)
-    {
-        this.centerTransform = centerTransform;
-    }
+        public void DeactivateMovement(LeanFinger leanFinger)
+        {
+            _canMove = false;
+        }
 
-    public void ActivateMovement(LeanFinger leanFinger)
-    {
-        _canMove = true;
-    }
+        //Main function for orbital movement
+        public void OrbitalMove(LeanFinger leanFinger)
+        {
+            if (!_canMove) return;
 
-    public void DeactivateMovement(LeanFinger leanFinger)
-    {
-        _canMove = false;
-    }
-
-    //Main function for orbital movement
-    public void OrbitalMove(LeanFinger leanFinger)
-    {
-        if (!_canMove) return;
-
-        var screenDeltaAxisValue = GetScreenDeltaAxisValue(leanFinger);
+            var screenDeltaAxisValue = GetScreenDeltaAxisValue(leanFinger);
         
-        _deltaRotation = -screenDeltaAxisValue * movementSpeed * Time.deltaTime;
+            _deltaRotation = -screenDeltaAxisValue * GetMovementSpeed() * Time.deltaTime;
         
-        var newRotation = _currentAngle + _deltaRotation;
+            var newRotation = _currentAngle + _deltaRotation;
 
-        CheckLimitAngle(newRotation);
+            CheckLimitAngle(newRotation);
 
-        _currentAngle += _deltaRotation;
+            _currentAngle += _deltaRotation;
             
-        var centerPosition = centerTransform.position;
+            var centerPosition = centerTransform.position;
         
-        var axisForRotation = GetAxisForRotation();
+            var axisForRotation = GetAxisForRotation();
         
-        transform.RotateAround(centerPosition, axisForRotation, _deltaRotation);
-    }
+            transform.RotateAround(centerPosition, axisForRotation, _deltaRotation);
+        }
 
-    private void CheckLimitAngle(float newRotation)
-    {
-        if (hasRotationLimit)
-            LimitAngle(newRotation);
-        else
-            NoAngleLimitation(newRotation);
-    }
-
-    private void NoAngleLimitation(float newRotation)
-    {
-        if (newRotation > 360) _currentAngle -= 360;
-        if (newRotation < -360) _currentAngle -= -360;
-    }
-
-    private void LimitAngle(float newRotation)
-    {
-        if (newRotation > maxLimitedAngel) _deltaRotation = maxLimitedAngel - _currentAngle;
-        if (newRotation < minLimitedAngel) _deltaRotation = minLimitedAngel - _currentAngle;
-    }
-
-    private float GetScreenDeltaAxisValue(LeanFinger leanFinger)
-    {
-        return touchType switch
+        private float GetMovementSpeed()
         {
-            TouchType.RightToLeft => leanFinger.ScreenDelta.x,
-            TouchType.UpToDown => leanFinger.ScreenDelta.y,
-            _ => leanFinger.ScreenDelta.x
-        };
-    }
+#if UNITY_EDITOR
+            return movementSpeedForUnity;
+#else
+            return movementSpeedForExport;
+#endif
+        }
 
-    private Vector3 GetAxisForRotation()
-    {
-        return movementAxis switch
+        private void CheckLimitAngle(float newRotation)
         {
-            MovementAxis.X => -Vector3.right,
-            MovementAxis.Y => -Vector3.up,
-            MovementAxis.Z => -Vector3.forward,
-            _ => -Vector3.up
-        };
-    }
-    
-    private enum MovementAxis
-    {
-        X,
-        Y,
-        Z
-    }
-    
-    private enum TouchType
-    {
-        UpToDown,
-        RightToLeft
-    }
+            if (hasRotationLimit)
+                LimitAngle(newRotation);
+            else
+                NoAngleLimitation(newRotation);
+        }
 
-    private void OnDestroy()
-    {
-        LeanTouch.OnFingerDown -= ActivateMovement;
-        LeanTouch.OnFingerUp -= DeactivateMovement;
-        LeanTouch.OnFingerUpdate -= OrbitalMove;
+        private void NoAngleLimitation(float newRotation)
+        {
+            if (newRotation > 360) _currentAngle -= 360;
+            if (newRotation < -360) _currentAngle -= -360;
+        }
+
+        private void LimitAngle(float newRotation)
+        {
+            if (newRotation > maxLimitedAngel) _deltaRotation = maxLimitedAngel - _currentAngle;
+            if (newRotation < minLimitedAngel) _deltaRotation = minLimitedAngel - _currentAngle;
+        }
+
+        private float GetScreenDeltaAxisValue(LeanFinger leanFinger)
+        {
+            return leanFinger.ScreenDelta.magnitude * CoefficientHandler(leanFinger);
+        }
+
+        private int CoefficientHandler(LeanFinger leanFinger)
+        {
+            var screenSize = leanFinger.ScreenPosition;
+            var screenDelta = leanFinger.ScreenDelta;
+            if (screenSize.x <= Screen.width / 2 && screenSize.y <= Screen.height / 2)
+            {
+                if (screenDelta.x <= 0 && screenDelta.y >= 0)
+                    return -1;
+                if (screenDelta.x >= 0 && screenDelta.y <= 0)
+                    return 1;
+            }
+            if (screenSize.x <= Screen.width / 2 && screenSize.y >= Screen.height / 2)
+            {
+                if (screenDelta.x <= 0 && screenDelta.y <= 0)
+                    return 1;
+                if (screenDelta.x >= 0 && screenDelta.y >= 0)
+                    return -1;
+            }
+            if (screenSize.x >= Screen.width / 2 && screenSize.y >= Screen.height / 2)
+            {
+                if (screenDelta.x <= 0 && screenDelta.y >= 0)
+                    return 1;
+                if (screenDelta.x >= 0 && screenDelta.y <= 0)
+                    return -1;
+            }
+            if (screenSize.x >= Screen.width / 2 && screenSize.y <= Screen.height / 2)
+            {
+                if (screenDelta.x <= 0 && screenDelta.y <= 0)
+                    return -1;
+                if (screenDelta.x >= 0 && screenDelta.y >= 0)
+                    return 1;
+            }
+
+            return 0;
+        }
+
+        private Vector3 GetAxisForRotation()
+        {
+            return movementAxis switch
+            {
+                MovementAxis.X => -Vector3.right,
+                MovementAxis.Y => -Vector3.up,
+                MovementAxis.Z => -Vector3.forward,
+                _ => -Vector3.up
+            };
+        }
+    
+        private enum MovementAxis
+        {
+            X,
+            Y,
+            Z
+        }
+    
+        private enum TouchType
+        {
+            UpToDown,
+            RightToLeft
+        }
+
+        private void OnDestroy()
+        {
+            LeanTouch.OnFingerDown -= ActivateMovement;
+            LeanTouch.OnFingerUp -= DeactivateMovement;
+            LeanTouch.OnFingerUpdate -= OrbitalMove;
+        }
     }
 }
