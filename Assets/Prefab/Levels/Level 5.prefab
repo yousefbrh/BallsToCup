@@ -48,7 +48,7 @@ MonoBehaviour:
   levelNumber: 5
   ballsCountOnTube: 80
   ballsCountOnCup: 60
-  cup: {fileID: 0}
+  cup: {fileID: 462468034286916726}
   tube: {fileID: 1584109126657140732}
 --- !u!1001 &4063940982419938618
 PrefabInstance:
@@ -116,6 +116,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3905102389883195945, guid: dc5ca0117a56542b481323ae18b0505a, type: 3}
   m_PrefabInstance: {fileID: 4063940982419938618}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &462468034286916726 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4471231038574545228, guid: dc5ca0117a56542b481323ae18b0505a, type: 3}
+  m_PrefabInstance: {fileID: 4063940982419938618}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62592c37994f4a3aa84586e4c665c38d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8427513550038193410
 PrefabInstance:
   m_ObjectHideFlags: 0
